@@ -1,5 +1,5 @@
-#ifndef __MENU_H__
-#define __MENU_H__
+#ifndef MENU_H
+#define MENU_H
 
 #include <vector>
 #include <Arduino.h>
@@ -7,10 +7,11 @@
 #include "M5Cardputer.h"
 #include "SSH.h"
 #include "WiFi_module.h"
+#include "quiz.h"
 
 class Menu{
 private:
-    std::vector<String> items = {"WiFi", "SSH", "Options", "Exit"};
+    std::vector<String> items = {"WiFi", "Quiz", "SSH", "Options", "Exit"};
     int selectedIndex = 0;
 
 public:
@@ -19,7 +20,8 @@ public:
     void select();
 
     SSH ssh;
-    WiFiManager wifi_mgr;
+    Quiz quiz;
+    WiFiModule wifi_mgr;
 };
 
 #endif

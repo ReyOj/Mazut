@@ -1,22 +1,28 @@
 #include <Arduino.h>
 #include <menu.h>
+#include "mykeyboard.h"
 
 Menu menu;
+MyKeyboard kbd;
 
 void setup() {
   auto cfg = M5.config();
   M5Cardputer.begin(cfg, true);
-  M5Cardputer.Keyboard.begin();
+  kbd.begin();
   menu.draw();
 }
 
 void loop() {
-  M5Cardputer.update();
-
-  auto status = M5Cardputer.Keyboard.keysState();
-
-  if (M5Cardputer.Keyboard.isKeyPressed(';')) menu.navigate(-1);
-  if (M5Cardputer.Keyboard.isKeyPressed('.')) menu.navigate(1);
-  if (status.enter) menu.select();
-  if (M5Cardputer.Keyboard.isKeyPressed('`')) menu.draw();
+  kbd.update();
+  if(kbd.isPressed()){
+  if (kbd.getKey() == ';') menu.navigate(-1);
+  if (kbd.getKey() == '.') menu.navigate(1);
+  if (kbd.getKey() == '\n'){
+    delay(200);
+    menu.select();
+  }
+  if (kbd.getKey() == '`') menu.draw();
+  }
+  kbd.clearKeyBuffer();
+  delay(100);
 }

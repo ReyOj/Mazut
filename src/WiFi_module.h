@@ -1,10 +1,15 @@
-#ifndef __WIFI_H__
-#define __WIFI_H__
+#ifndef WIFI_H
+#define WIFI_H
 
 #include <WiFi.h>
 #include <M5Cardputer.h>
 
-class WiFiManager{
+#include "mykeyboard.h"
+//#include "menu.h"
+
+class WiFiModule{
+private:
+    MyKeyboard kbd;
 public:
     void connectWifi();
 };

@@ -11,6 +11,10 @@ void Menu::draw(){
             M5Cardputer.Display.println("  " + items[i]);
         }
     }
+    #ifdef WIFI_CONNECTED
+        M5Cardputer.Display.setCursor(0, -1);
+        M5Cardputer.Display.println("WiFi");
+    #endif
 }
 
 void Menu::navigate(int direction){
@@ -21,5 +25,6 @@ void Menu::navigate(int direction){
 
 void Menu::select(){
     if(selectedIndex == 0) wifi_mgr.connectWifi();
-    if(selectedIndex == 1) ssh.startSSH();
+    if(selectedIndex == 2) ssh.startSSH();
+    if(selectedIndex == 1) quiz.start_server();
 }
